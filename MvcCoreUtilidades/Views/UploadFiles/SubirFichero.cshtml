@@ -7,8 +7,16 @@
         Subir fichero
     </button>
 </form>
-<img src="~/uploads/batman.png" 
-style="width: 150px; height: 150px"/>
+<img src='@ViewData["URL"]'
+     style="width: 150px; height: 150px"/>
+
+<h2 style="color:fuchsia">
+    @ViewData["TEST"]
+</h2>
+
+<h2 style="color:blue">
+    @ViewData["URL"]
+</h2>
 
 <h2 style="color:red">
     @ViewData["MENSAJE"]

@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
+using MvcCoreUtilidades.Helpers;
 using System.Runtime.InteropServices;
 
 namespace MvcCoreUtilidades.Controllers
 {
     public class UploadFilesController : Controller
     {
-        private IWebHostEnvironment hostEnvironment;
+        private HelperPathProvider helperPathProvider;
 
-        public UploadFilesController(IWebHostEnvironment hostEnvironment)
+        public UploadFilesController(HelperPathProvider helperPathProvider)
         {
-            this.hostEnvironment = hostEnvironment;
+            this.helperPathProvider = helperPathProvider; 
         }
 
         public IActionResult SubirFichero()
@@ -20,17 +22,9 @@ namespace MvcCoreUtilidades.Controllers
         [HttpPost]
         public async Task<IActionResult> SubirFichero(IFormFile fichero)
         {
-            //RECUPERAMOS LA RUTA DE NUESTRO SERVER
-            string rootFolder =
-                this.hostEnvironment.WebRootPath;
-            string fileName = fichero.FileName;
-            //NECESITAMOS LA RUTA FISICA PARA PODER ESCRIBIR EL FICHERO
-            //LA RUTA ES LA COMBINACION DE TEMPFOLDER Y FILENAME
-            // C:\Documents\Temp\file1.txt
-            // /var/documents/temp/file1.txt
-            //CUANDO ESTEMOS HABLANDO DE FILES (System.IO) PARA 
-            //ACCEDER A RUTAS, SIEMPRE DEBEMOS UTILIZAR Path.Combine
-            string path = Path.Combine(rootFolder, "users", fileName);
+            string path = 
+                this.helperPathProvider.MapPath
+                (fichero.FileName, Folders.Uploads);
             //SUBIMOS EL FICHERO UTILIZANDO Stream
             using (Stream stream = new FileStream(path, FileMode.Create))
             {
@@ -39,6 +33,15 @@ namespace MvcCoreUtilidades.Controllers
                 await fichero.CopyToAsync(stream);
             }
             ViewData["MENSAJE"] = "Fichero subido a " + path;
+            string urlServer = HttpContext.Request.Scheme
+                    + "://" + HttpContext.Request.Host;
+            ViewData["TEST"] = 
+                HttpContext.Request.Scheme
+                    + "://" + HttpContext.Request.Host;
+            string urlPath =
+                this.helperPathProvider.MapUrlPath(fichero.FileName
+                , Folders.Uploads);
+            ViewData["URL"] = urlPath;
             return View();
         }
     }
