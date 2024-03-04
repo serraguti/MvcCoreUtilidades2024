@@ -35,5 +35,38 @@ namespace MvcCoreUtilidades.Controllers
             }
             return View();
         }
+
+        public IActionResult CifradoEficiente()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CifradoEficiente
+            (string contenido, string resultado, string accion)
+        {
+            if (accion.ToLower() == "cifrar")
+            {
+                //CIFRAMOS GENERANDO UN NUEVO SALT
+                string response =
+                    HelperCryptography.EncriptarContenido(contenido, false);
+                ViewData["TEXTOCIFRADO"] = response;
+            }else if (accion.ToLower() == "comparar")
+            {
+                string response =
+                    HelperCryptography.EncriptarContenido(contenido, true);
+                if (response != resultado)
+                {
+                    ViewData["MENSAJE"] = 
+                        "<h1 style='color:red'>Los datos NO son iguales</h1>";
+                }
+                else
+                {
+                    ViewData["MENSAJE"] = 
+                        "<h1 style='color:blue'>Los contenidos son IGUALES</h1>";
+                }
+            }
+            return View();
+        }
     }
 }
