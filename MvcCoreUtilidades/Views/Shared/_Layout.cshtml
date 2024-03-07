@@ -24,31 +24,45 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark"
-                               asp-controller="Caching" 
-                               asp-action="MemoriaPersonalizada">
-                                Caching Personalizado
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Ejemplos Caching
                             </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item"
+                                       asp-controller="Caching"
+                                       asp-action="MemoriaPersonalizada">
+                                        Caching Personalizado
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item"
+                                       asp-controller="Caching"
+                                       asp-action="MemoriaDistribuida">
+                                        Caching Distribuido
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark"
-                               asp-controller="Caching"
-                               asp-action="MemoriaDistribuida">
-                                Caching Distribuido
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Ejemplos Cifrados
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark"
-                               asp-controller="Cifrados" asp-action="CifradoEficiente">
-                                Cifrado Eficiente
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark"
-                               asp-controller="Cifrados" asp-action="CifradoBasico">
-                                Cifrado Basico
-                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item"
+                                       asp-controller="Cifrados" asp-action="CifradoEficiente">
+                                        Cifrado Eficiente
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item"
+                                       asp-controller="Cifrados" asp-action="CifradoBasico">
+                                        Cifrado Basico
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark"
@@ -61,6 +75,22 @@
                             asp-controller="UploadFiles" asp-action="SubirFichero">
                                 Upload File
                             </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Ejemplos Ajax
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" 
+                                asp-controller="Coches"
+                                asp-action="Index">
+                                        Ajax Coches
+                                    </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#">Another link</a></li>
+                                <li><a class="dropdown-item" href="#">A third link</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
